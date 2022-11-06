@@ -1,13 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "Word Counter for Google Forms",
-  "version": "1.0.0",
-  "description": "This extension shows the number of letters you are writing on a Google Form.",
+  "name": "賃貸住所チェッカー",
+  "version": "1.0.2",
+  "description": "SUUMO等の賃貸物件検索サイトで指定した住所リスト内の物件かチェックできる拡張ツールです",
   "permissions": [
-    "activeTab",
-    "storage"
+    "storage",
+    "https://suumo.jp/*",
+    "https://www.homes.co.jp/chintai/*"
   ],
-  // "options_page": "index.html",
+  "options_page": "popup/build/index.html",
   "action": {
     "default_popup": "popup/build/index.html"
   },
@@ -19,8 +20,18 @@
       "run_at": "document_end",
       "all_frames": true,
       "js": [
-        "content-script.js"
+        "suumo.js"
       ]
-    }
+    },
+        {
+          "matches": [
+            "https://www.homes.co.jp/chintai/*"
+          ],
+          "run_at": "document_end",
+          "all_frames": true,
+          "js": [
+            "content-script.js"
+          ]
+        }
   ]
 }
