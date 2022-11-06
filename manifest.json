@@ -4,8 +4,13 @@
   "version": "1.0.0",
   "description": "This extension shows the number of letters you are writing on a Google Form.",
   "permissions": [
+    "activeTab",
     "storage"
   ],
+  // "options_page": "index.html",
+  "action": {
+    "default_popup": "index.html"
+  },
   "content_scripts": [
     {
       "matches": [

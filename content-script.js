@@ -4,7 +4,7 @@ const handler = async () => {
   console.log("on load")
   const es = document.getElementsByClassName('cassetteitem_detail-col1')
 
-  await setAllowedAddresses(["東京都渋谷区神泉町", "東京都渋谷区円山町"])
+  // await setAllowedAddresses(["東京都渋谷区神泉町", "東京都渋谷区円山町"])
   const addresses = await getAllowedAddresses()
 
   for (let i = 0; i < es.length; i++) {
@@ -36,12 +36,6 @@ const getAllowedAddresses = async () => {
   const data = await chrome.storage.local.get("addresses")
   console.log(data)
   return data.addresses
-}
-
-const setAllowedAddresses = async (addresses) => {
-  await chrome.storage.local.set({
-    "addresses": addresses,
-  })
 }
 
 window.addEventListener('load', () => handler(), false);
