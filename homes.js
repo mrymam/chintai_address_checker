@@ -1,7 +1,17 @@
 'use strict';
 
 const handler = async () => {
-  const es = document.getElementsByClassName('cassetteitem_detail-col1')
+  console.log("load")
+  const divs = document.getElementsByClassName('bukkenSpec')
+  const es = Array.from(divs).map((div) => {
+    const tb = div.firstElementChild.firstElementChild
+    const ad = tb.getElementsByClassName("address")
+    if (ad.length > 0) {
+      return ad[1]
+    }
+    return tb.firstElementChild.lastChild
+  })
+
   const addresses = await getAllowedAddresses()
 
   for (let i = 0; i < es.length; i++) {
@@ -22,7 +32,7 @@ const applyElement = (el, alloweds) => {
 const checkAddress = (address, allowedAddresses) => {
   for (let i = 0; i < allowedAddresses.length; i++) {
     const a = allowedAddresses[i]
-    if (address == a) {
+    if (!address.indexOf(a)) {
       return true
     }
   }

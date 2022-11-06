@@ -4,7 +4,9 @@
   "version": "1.0.2",
   "description": "SUUMO等の賃貸物件検索サイトで指定した住所リスト内の物件かチェックできる拡張ツールです",
   "permissions": [
-    "storage",
+    "storage"
+  ],
+  "host_permissions": [
     "https://suumo.jp/*",
     "https://www.homes.co.jp/chintai/*"
   ],
@@ -23,15 +25,15 @@
         "suumo.js"
       ]
     },
-        {
-          "matches": [
-            "https://www.homes.co.jp/chintai/*"
-          ],
-          "run_at": "document_end",
-          "all_frames": true,
-          "js": [
-            "content-script.js"
-          ]
-        }
+    {
+      "matches": [
+        "https://www.homes.co.jp/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "js": [
+        "homes.js"
+      ]
+    }
   ]
 }
