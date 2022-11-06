@@ -13,6 +13,8 @@ document.getElementById("load-button").addEventListener("click", async () => {
   // chrome.storage.local.set({ "memo1": inputValue }, function () { });
 });
 
-window.addEventListener('load', () => {
+window.addEventListener('load', async() => {
+  const data = await chrome.storage.local.get("addresses")
+  console.log(data)
   document.getElementById("textarea").value = "hogehoge"
 });

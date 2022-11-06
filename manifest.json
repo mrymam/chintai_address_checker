@@ -9,7 +9,7 @@
   ],
   // "options_page": "index.html",
   "action": {
-    "default_popup": "index.html"
+    "default_popup": "popup/build/index.html"
   },
   "content_scripts": [
     {
