@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Word Counter for Google Forms",
+  "version": "1.0.0",
+  "description": "This extension shows the number of letters you are writing on a Google Form.",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://suumo.jp/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "js": [
+        "content-script.js"
+      ]
+    }
+  ]
+}
