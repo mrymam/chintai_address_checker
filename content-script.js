@@ -1,10 +1,7 @@
 'use strict';
 
 const handler = async () => {
-  console.log("on load")
   const es = document.getElementsByClassName('cassetteitem_detail-col1')
-
-  // await setAllowedAddresses(["東京都渋谷区神泉町", "東京都渋谷区円山町"])
   const addresses = await getAllowedAddresses()
 
   for (let i = 0; i < es.length; i++) {
@@ -16,9 +13,9 @@ const handler = async () => {
 const applyElement = (el, alloweds) => {
   const address = el.innerText
   if (checkAddress(address, alloweds)) {
-    el.innerText = `(OK) ${address}`
+    el.innerHTML = `<span style="color: blue;font-weight: bold">(OK)</span> ${address}`
   } else {
-    el.innerText = `(NG) ${address}`
+    el.innerHTML = `<span style="color: red;font-weight: bold">(NG)</span> ${address}`
   }
 }
 
@@ -34,7 +31,6 @@ const checkAddress = (address, allowedAddresses) => {
 
 const getAllowedAddresses = async () => {
   const data = await chrome.storage.local.get("addresses")
-  console.log(data)
   return data.addresses
 }
 
