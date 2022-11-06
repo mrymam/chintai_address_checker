@@ -19,7 +19,14 @@ const applyElement = (el, alloweds) => {
   }
 }
 
+const zenkaku2Hankaku = (str) => {
+  return str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (s) {
+    return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+  });
+}
+
 const checkAddress = (address, allowedAddresses) => {
+  address = zenkaku2Hankaku(address)
   for (let i = 0; i < allowedAddresses.length; i++) {
     const a = allowedAddresses[i]
     if (address == a) {

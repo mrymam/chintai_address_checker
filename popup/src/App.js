@@ -88,7 +88,9 @@ const fetchAddresses = async () => {
 const clearAddresses = async () => {
   saveAddresses([])
 }
+
 const addAddress = async (address) => {
+  address = zenkaku2Hankaku(address)
   const addresses = await fetchAddresses()
   addresses.push(address)
   saveAddresses(addresses)
@@ -112,6 +114,12 @@ const deleteAddress = async (address) => {
     return !(add == address)
   })
   await saveAddresses(addresses)
+}
+
+const zenkaku2Hankaku = (str) => {
+  return str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (s) {
+    return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+  });
 }
 
 export default App;
