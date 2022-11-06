@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "賃貸住所チェッカー",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "SUUMO等の賃貸物件検索サイトで指定した住所リスト内の物件かチェックできる拡張ツールです",
   "permissions": [
     "storage"
