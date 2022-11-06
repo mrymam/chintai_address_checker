@@ -19,12 +19,14 @@ function App() {
   }
 
   const addHandler = async () => {
+    console.log(process.env.NODE_ENV)
     const addresses = text.split("\n")
     for (let i = 0; i < addresses.length; i++) {
       const address = addresses[i]
       await addAddress(address)
     }
     await loadAddresses()
+    setText("")
   }
 
   const clearHandler = async () => {
@@ -34,7 +36,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className='title'>ホゲホゲ</h1>
+      <h1 className='title'>チェックする住所の設定</h1>
       <div className='listWrap'>
         <p className='subtitle'>追加済み住所</p>
         {
@@ -74,7 +76,8 @@ function App() {
 const fetchAddresses = async () => {
   if (process.env.NODE_ENV == "production") {
     const data = await chrome.storage.local.get("addresses")
-    return !data.address ? [] : data.address
+    console.log(data)
+    return !data.addresses ? [] : data.addresses
   }
 
   const data = localStorage.getItem('addresses')
@@ -83,26 +86,20 @@ const fetchAddresses = async () => {
 }
 
 const clearAddresses = async () => {
-  if (process.env.NODE_ENV == "production") {
-    await chrome.storage.local.save("addresses", [])
-  }
-  const data = JSON.stringify([])
-  localStorage.setItem('addresses', data)
+  saveAddresses([])
 }
 const addAddress = async (address) => {
   const addresses = await fetchAddresses()
   addresses.push(address)
-  if (process.env.NODE_ENV == "production") {
-    await chrome.storage.local.save("addresses", addresses)
-    return
-  }
-  const data = JSON.stringify(addresses)
-  localStorage.setItem('addresses', data)
+  saveAddresses(addresses)
 }
 
 const saveAddresses = async (addresses) => {
   if (process.env.NODE_ENV == "production") {
-    await chrome.storage.local.save("addresses", addresses)
+    // console.log(addresses)
+    await chrome.storage.local.set({
+      "addresses": addresses,
+    })
     return
   }
   const data = JSON.stringify(addresses)
